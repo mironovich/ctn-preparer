@@ -3,11 +3,11 @@ sec,ctn
 10800,9091234567
 */
 const config = {
-  csv: './data/ctn.csv', // path to csv with ctn and timezone
+  csv: 'data/ctn.csv', // path to csv with ctn and timezone
   zone: 'sec', // name of timezone column
   ctn: 'ctn', // name of ctn column
   max_size: 25000, // max rows in a file
-  campaign: 'MAY_HOLIDAYS', // name of campaign to distinguish files
+  campaign: 'MAY_7DAYS_WITH_INTEREST', // name of campaign to distinguish files
   divider: 3600, // 3600 for timezone in seconds
 }
 
@@ -50,6 +50,7 @@ fs.createReadStream(config.csv)
     } else if (results[zone].length >= config.max_size) {
       printArray(zone, results[zone])
       results[zone] = []
+      counter[zone]++
     }
     results[zone].push(data[config.ctn])
   })
